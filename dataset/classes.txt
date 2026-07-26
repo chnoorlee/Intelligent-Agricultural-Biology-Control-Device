@@ -1,0 +1,13 @@
+﻿sparrow      麻雀      Passer montanus         害鸟
+pigeon       鸽子      Columba livia           害鸟
+crow         乌鸦      Corvus corone            害鸟
+magpie       喜鹊      Pica pica                害鸟
+starling     椋鸟      Sturnus vulgaris         害鸟
+blackbird    乌鸫      Turdus merula            害鸟
+myna         八哥      Acridotheres tristis     害鸟
+bulbul       白头鹎    Pycnonotus sinensis      害鸟
+swallow      燕子      Hirundo rustica          益鸟
+robin        知更鸟    Erithacus rubecula       益鸟
+spotted_dove 珠颈斑鸠  Spilopelia chinensis     中性
+egret        白鹭      Egretta garzetta         益鸟
+heron        苍鹭      Ardea cinerea            益鸟

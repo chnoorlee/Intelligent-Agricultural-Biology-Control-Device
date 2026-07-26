@@ -1,0 +1,39 @@
+﻿server:
+  host: 0.0.0.0
+  port: 8000
+  debug: false
+
+database:
+  path: data/bird_analysis.db
+  backup_interval_hours: 24
+
+deepseek:
+  api_key: ""
+  api_base: https://api.deepseek.com/v1
+  model: deepseek-chat
+  max_tokens: 2048
+  temperature: 0.3
+
+analysis:
+  hotspot_threshold: 0.5
+  time_window_days: 7
+  density_grid_resolution_m: 20
+  kernel_bandwidth_m: 100
+
+alert:
+  check_interval_seconds: 60
+  high_density_threshold: 50
+  battery_low_threshold: 20
+  signal_loss_timeout_seconds: 30
+
+detection:
+  confidence_threshold: 0.5
+  pest_classes:
+    - sparrow
+    - pigeon
+    - crow
+    - magpie
+    - starling
+    - blackbird
+    - myna
+    - bulbul

@@ -1,0 +1,83 @@
+# YOLOv8 Bird Detection Configuration
+# 智能农业生物防控 - 鸟类检测模型配置
+
+# 模型参数
+model:
+  name: "yolov8n"              # 模型变体: n/s/m/l/x (nano/small/medium/large/xlarge)
+  input_size: [640, 640]       # 输入图像尺寸 (H, W)
+  channels: 3                  # 输入通道数 (RGB)
+  num_classes: 7               # 类别数量
+
+# 类别定义
+# 0: sparrow (麻雀 - 害鸟)
+# 1: crow (乌鸦 - 害鸟)
+# 2: magpie (喜鹊 - 害鸟)
+# 3: pigeon (鸽子 - 害鸟)
+# 4: swallow (燕子 - 益鸟)
+# 5: owl (猫头鹰 - 益鸟)
+# 6: woodpecker (啄木鸟 - 益鸟)
+
+names:
+  0: "sparrow"
+  1: "crow"
+  2: "magpie"
+  3: "pigeon"
+  4: "swallow"
+  5: "owl"
+  6: "woodpecker"
+
+# 害鸟/益鸟分类
+pest_birds: [0, 1, 2, 3]      # 需要驱离的害鸟类别ID
+beneficial_birds: [4, 5, 6]   # 需要保护的益鸟类别ID
+
+# 训练参数
+train:
+  epochs: 300                  # 训练轮数
+  batch_size: 16               # 批次大小
+  img_size: 640                # 训练图像尺寸
+  learning_rate: 0.01          # 初始学习率
+  lr_final: 0.0001             # 最终学习率(余弦退火)
+  momentum: 0.937              # SGD动量
+  weight_decay: 0.0005         # 权重衰减
+  warmup_epochs: 3             # 预热轮数
+  warmup_momentum: 0.8         # 预热初始动量
+  augment:                     # 数据增强策略
+    hsv_h: 0.015               # HSV色调增强
+    hsv_s: 0.7                 # HSV饱和度增强
+    hsv_v: 0.4                 # HSV亮度增强
+    degrees: 10.0              # 旋转角度 (±)
+    translate: 0.1             # 平移比例
+    scale: 0.5                 # 缩放比例
+    shear: 2.0                 # 剪切角度
+    perspective: 0.0           # 透视变换
+    flipud: 0.2                # 上下翻转概率
+    fliplr: 0.5                # 左右翻转概率
+    mosaic: 1.0                # Mosaic增强概率
+    mixup: 0.1                 # MixUp增强概率
+
+# 推理参数
+inference:
+  conf_threshold: 0.25         # 置信度阈值
+  iou_threshold: 0.45          # NMS的IoU阈值
+  max_detections: 100          # 最大检测数量
+  device: "cpu"                # 推理设备: cpu/cuda:0
+  half_precision: false        # 是否使用FP16推理
+
+# 数据集路径
+dataset:
+  train: "./datasets/bird_detect/train/images"
+  val: "./datasets/bird_detect/val/images"
+  test: "./datasets/bird_detect/test/images"
+  labels_train: "./datasets/bird_detect/train/labels"
+  labels_val: "./datasets/bird_detect/val/labels"
+
+# 输出配置
+output:
+  save_dir: "./runs/bird_detect"
+  save_period: 10              # 每N个epoch保存一次权重
+  export:
+    onnx: true                 # 导出ONNX
+    tflite: true               # 导出TFLite
+    simplify: true             # 简化ONNX模型
+    dynamic: false             # 动态batch大小
+    opset: 12                  # ONNX opset版本
